@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-danger">
+  <h3>Borrar Niño</h3>
+  <p>¿Está seguro que desea eliminar el registro de <strong>{{ nino.nombre }} {{ nino.apellido }}</strong>?</p>
+  <p class="small">Esta acción también eliminará sus asistencias y registros de pagos asociados.</p>
+</div>
+<form method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger" type="submit">Confirmar Eliminación</button>
+  <a class="btn btn-secondary" href="{% url 'ver_ninos' %}">Cancelar</a>
+</form>
+{% endblock %}

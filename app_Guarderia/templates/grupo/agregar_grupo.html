@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Crear Nuevo Grupo</h3>
+<form method="POST">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label class="form-label">Nombre del Grupo</label>
+    <input class="form-control" name="nombre_grupo" placeholder="Ej: Los Pollitos, Maternal A" required>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Edad Mínima (años)</label>
+      <input class="form-control" name="edad_minima" type="number" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Edad Máxima (años)</label>
+      <input class="form-control" name="edad_maxima" type="number" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Número de Niños Actual</label>
+      <input class="form-control" name="num_ninos_actual" type="number" value="0" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Capacidad Máxima</label>
+      <input class="form-control" name="capacidad_maxima" type="number" required>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Personal a Cargo</label>
+    <select class="form-control" name="personal_cargo">
+      <option value="">-- Seleccionar Personal --</option>
+      {% for p in personal %}
+        <option value="{{ p.id }}">{{ p.nombre }} {{ p.apellido }} ({{ p.cargo }})</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Descripción de Actividades</label>
+    <textarea class="form-control" name="descripcion_actividades" rows="2"></textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Crear Grupo</button>
+  <a class="btn btn-secondary" href="{% url 'ver_grupos' %}">Cancelar</a>
+</form>
+{% endblock %}

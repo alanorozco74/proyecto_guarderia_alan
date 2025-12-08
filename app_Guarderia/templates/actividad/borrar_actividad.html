@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-danger">
+  <h3>Borrar Actividad</h3>
+  <p>¿Está seguro que desea eliminar la actividad <strong>{{ act.nombre_actividad }}</strong>?</p>
+</div>
+<form method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger" type="submit">Confirmar Eliminación</button>
+  <a class="btn btn-secondary" href="{% url 'ver_actividades' %}">Cancelar</a>
+</form>
+{% endblock %}

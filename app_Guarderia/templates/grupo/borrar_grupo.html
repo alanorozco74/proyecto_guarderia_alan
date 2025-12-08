@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-danger">
+  <h3>Borrar Grupo</h3>
+  <p>¿Está seguro que desea eliminar el grupo <strong>{{ grupo.nombre_grupo }}</strong>?</p>
+  <p class="small">Los niños asignados a este grupo quedarán sin grupo asignado.</p>
+</div>
+<form method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger" type="submit">Confirmar Eliminación</button>
+  <a class="btn btn-secondary" href="{% url 'ver_grupos' %}">Cancelar</a>
+</form>
+{% endblock %}

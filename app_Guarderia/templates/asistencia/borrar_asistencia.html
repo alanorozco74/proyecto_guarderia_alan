@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-danger">
+  <h3>Borrar Asistencia</h3>
+  <p>¿Está seguro que desea eliminar el registro de asistencia de <strong>{{ a.nino.nombre }}</strong> del día {{ a.fecha_asistencia }}?</p>
+</div>
+<form method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger" type="submit">Confirmar Eliminación</button>
+  <a class="btn btn-secondary" href="{% url 'ver_asistencias' %}">Cancelar</a>
+</form>
+{% endblock %}

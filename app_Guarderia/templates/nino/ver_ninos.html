@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Lista de Niños Inscritos</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead class="table-primary">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Fecha Nac.</th>
+        <th>Género</th>
+        <th>Grupo</th>
+        <th>Padre Principal</th>
+        <th>Fecha Insc.</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for n in ninos %}
+      <tr>
+        <td>{{ n.id }}</td>
+        <td>{{ n.nombre }}</td>
+        <td>{{ n.apellido }}</td>
+        <td>{{ n.fecha_nacimiento|date:"d/m/Y" }}</td>
+        <td>{{ n.genero }}</td>
+        <td>{{ n.grupo_asignado.nombre_grupo|default:"Sin Grupo" }}</td>
+        <td>{{ n.padre_principal.nombre }} {{ n.padre_principal.apellido }}</td>
+        <td>{{ n.fecha_inscripcion|date:"d/m/Y" }}</td>
+        <td>
+          <a class="btn btn-sm btn-info" href="{% url 'actualizar_nino' n.id %}">Editar</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'borrar_nino' n.id %}">Borrar</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="9" class="text-center">No hay niños registrados.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

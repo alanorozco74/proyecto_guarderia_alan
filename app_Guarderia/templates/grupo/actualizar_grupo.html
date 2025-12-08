@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Actualizar Grupo: {{ grupo.nombre_grupo }}</h3>
+<form method="POST" action="{% url 'realizar_actualizacion_grupo' grupo.id %}">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label class="form-label">Nombre del Grupo</label>
+    <input class="form-control" name="nombre_grupo" value="{{ grupo.nombre_grupo }}" required>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Edad Mínima</label>
+      <input class="form-control" name="edad_minima" type="number" value="{{ grupo.edad_minima }}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Edad Máxima</label>
+      <input class="form-control" name="edad_maxima" type="number" value="{{ grupo.edad_maxima }}" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Niños Actuales</label>
+      <input class="form-control" name="num_ninos_actual" type="number" value="{{ grupo.num_ninos_actual }}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Capacidad Máxima</label>
+      <input class="form-control" name="capacidad_maxima" type="number" value="{{ grupo.capacidad_maxima }}" required>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Personal a Cargo</label>
+    <select class="form-control" name="personal_cargo">
+      <option value="">-- Sin Asignar --</option>
+      {% for p in personal %}
+        <option value="{{ p.id }}" {% if grupo.personal_cargo and p.id == grupo.personal_cargo.id %}selected{% endif %}>
+          {{ p.nombre }} {{ p.apellido }} ({{ p.cargo }})
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Descripción</label>
+    <textarea class="form-control" name="descripcion_actividades" rows="2">{{ grupo.descripcion_actividades|default_if_none:'' }}</textarea>
+  </div>
+
+  <button class="btn btn-success" type="submit">Guardar Cambios</button>
+  <a class="btn btn-secondary" href="{% url 'ver_grupos' %}">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-danger">
+  <h3>Borrar Personal</h3>
+  <p>¿Está seguro que desea eliminar a <strong>{{ p.nombre }} {{ p.apellido }}</strong>?</p>
+  <p class="small">Si esta persona está a cargo de un grupo, el grupo quedará sin responsable asignado.</p>
+</div>
+<form method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger" type="submit">Confirmar Eliminación</button>
+  <a class="btn btn-secondary" href="{% url 'ver_personal' %}">Cancelar</a>
+</form>
+{% endblock %}

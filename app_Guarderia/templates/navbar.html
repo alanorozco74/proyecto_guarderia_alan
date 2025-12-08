@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'inicio_guarderia' %}">Guardería</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'inicio_guarderia' %}">Inicio</a>
+          </li>
+  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="padresDropdown" role="button" data-bs-toggle="dropdown">Padres</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'agregar_padre' %}">Agregar Padre/Madre</a></li>
+              <li><a class="dropdown-item" href="{% url 'ver_padres' %}">Ver Padres</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="personalDropdown" role="button" data-bs-toggle="dropdown">Personal</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'agregar_personal' %}">Agregar Personal</a></li>
+              <li><a class="dropdown-item" href="{% url 'ver_personal' %}">Ver Personal</a></li>
+            </ul>
+          </li>
+  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="gruposDropdown" role="button" data-bs-toggle="dropdown">Grupos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'agregar_grupo' %}">Agregar Grupo</a></li>
+              <li><a class="dropdown-item" href="{% url 'ver_grupos' %}">Ver Grupos</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="ninosDropdown" role="button" data-bs-toggle="dropdown">Niños</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'agregar_nino' %}">Agregar Niño</a></li>
+              <li><a class="dropdown-item" href="{% url 'ver_ninos' %}">Ver Niños</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="actividadesDropdown" role="button" data-bs-toggle="dropdown">Actividades</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'agregar_actividad' %}">Agregar Actividad</a></li>
+              <li><a class="dropdown-item" href="{% url 'ver_actividades' %}">Ver Actividades</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="asistenciasDropdown" role="button" data-bs-toggle="dropdown">Asistencia</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'agregar_asistencia' %}">Registrar Asistencia</a></li>
+              <li><a class="dropdown-item" href="{% url 'ver_asistencias' %}">Ver Asistencias</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagosDropdown" role="button" data-bs-toggle="dropdown">Pagos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'agregar_pago' %}">Registrar Pago</a></li>
+              <li><a class="dropdown-item" href="{% url 'ver_pagos' %}">Ver Pagos</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Lista del Personal</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead class="table-primary">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Cargo</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>Turno</th>
+        <th>Salario</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in personal %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.nombre }} {{ p.apellido }}</td>
+        <td>{{ p.cargo }}</td>
+        <td>{{ p.telefono }}</td>
+        <td>{{ p.email }}</td>
+        <td>{{ p.turno }}</td>
+        <td>${{ p.salario }}</td>
+        <td>
+          <a class="btn btn-sm btn-info" href="{% url 'actualizar_personal' p.id %}">Editar</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'borrar_personal' p.id %}">Borrar</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="8" class="text-center">No hay personal registrado.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

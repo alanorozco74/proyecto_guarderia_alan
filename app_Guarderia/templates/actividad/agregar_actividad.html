@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Agregar Actividad</h3>
+<form method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Nombre Actividad</label>
+      <input class="form-control" name="nombre_actividad" placeholder="Ej: Hora del Cuento" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Grupo</label>
+      <select class="form-control" name="grupo" required>
+        <option value="">-- Seleccionar Grupo --</option>
+        {% for g in grupos %}
+          <option value="{{ g.id }}">{{ g.nombre_grupo }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Horario</label>
+      <input class="form-control" name="horario" placeholder="Ej: 10:00 - 11:00 AM" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Duración (min)</label>
+      <input class="form-control" name="duracion_minutos" type="number" required>
+    </div>
+    <div class="col-md-4 mb-3 d-flex align-items-center">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="es_obligatoria" id="es_obligatoria" checked>
+        <label class="form-check-label" for="es_obligatoria">¿Es Obligatoria?</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Descripción</label>
+    <textarea class="form-control" name="descripcion" rows="2"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Material Requerido</label>
+    <input class="form-control" name="material_requerido" placeholder="Ej: Crayones, Papel">
+  </div>
+
+  <button class="btn btn-primary" type="submit">Guardar Actividad</button>
+  <a class="btn btn-secondary" href="{% url 'ver_actividades' %}">Cancelar</a>
+</form>
+{% endblock %}

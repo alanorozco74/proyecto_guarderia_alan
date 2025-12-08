@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Actualizar Asistencia</h3>
+<form method="POST" action="{% url 'realizar_actualizacion_asistencia' a.id %}">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Fecha</label>
+      <input class="form-control" name="fecha_asistencia" type="date" value="{{ a.fecha_asistencia|date:'Y-m-d' }}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Niño</label>
+      <select class="form-control" name="nino" required>
+        {% for n in ninos %}
+          <option value="{{ n.id }}" {% if n.id == a.nino.id %}selected{% endif %}>
+            {{ n.nombre }} {{ n.apellido }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Hora Entrada</label>
+      <input class="form-control" name="hora_entrada" type="time" value="{{ a.hora_entrada|time:'H:i' }}" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Hora Salida</label>
+      <input class="form-control" name="hora_salida" type="time" value="{{ a.hora_salida|time:'H:i' }}">
+    </div>
+    <div class="col-md-4 mb-3 d-flex align-items-center">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="estuvo_enfermo" id="estuvo_enfermo" {% if a.estuvo_enfermo %}checked{% endif %}>
+        <label class="form-check-label" for="estuvo_enfermo">¿Estuvo Enfermo?</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Registrado Por</label>
+    <select class="form-control" name="personal_registro" required>
+      {% for p in personal %}
+        <option value="{{ p.id }}" {% if a.personal_registro and p.id == a.personal_registro.id %}selected{% endif %}>
+          {{ p.nombre }} {{ p.apellido }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Notas del Día</label>
+    <textarea class="form-control" name="notas_dia" rows="2">{{ a.notas_dia|default_if_none:'' }}</textarea>
+  </div>
+
+  <button class="btn btn-success" type="submit">Guardar Cambios</button>
+  <a class="btn btn-secondary" href="{% url 'ver_asistencias' %}">Cancelar</a>
+</form>
+{% endblock %}

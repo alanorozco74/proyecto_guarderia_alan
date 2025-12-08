@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Registrar Pago</h3>
+<form method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Niño</label>
+      <select class="form-control" name="nino" required>
+        <option value="">-- Seleccionar Niño --</option>
+        {% for n in ninos %}
+          <option value="{{ n.id }}">{{ n.nombre }} {{ n.apellido }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Concepto</label>
+      <input class="form-control" name="concepto" placeholder="Ej: Mensualidad Marzo" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Monto Pagado</label>
+      <input class="form-control" name="monto_pagado" type="number" step="0.01" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Método de Pago</label>
+      <select class="form-control" name="metodo_pago" required>
+        <option value="Efectivo">Efectivo</option>
+        <option value="Transferencia">Transferencia</option>
+        <option value="Tarjeta">Tarjeta</option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Estado</label>
+      <select class="form-control" name="estado_pago" required>
+        <option value="Pagado">Pagado</option>
+        <option value="Pendiente">Pendiente</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Mes Correspondiente</label>
+      <input class="form-control" name="mes_correspondiente" type="date" required>
+      <div class="form-text">Seleccione cualquier día del mes a pagar.</div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Fecha Vencimiento</label>
+      <input class="form-control" name="fecha_vencimiento" type="date" required>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Registrar Pago</button>
+  <a class="btn btn-secondary" href="{% url 'ver_pagos' %}">Cancelar</a>
+</form>
+{% endblock %}

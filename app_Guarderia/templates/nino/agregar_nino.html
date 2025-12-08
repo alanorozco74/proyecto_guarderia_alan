@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Inscribir Nuevo Niño</h3>
+<form method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Nombre</label>
+      <input class="form-control" name="nombre" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Apellido</label>
+      <input class="form-control" name="apellido" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Fecha de Nacimiento</label>
+      <input class="form-control" name="fecha_nacimiento" type="date" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Género</label>
+      <select class="form-control" name="genero" required>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Fecha Inscripción</label>
+      <input class="form-control" name="fecha_inscripcion" type="date" value="{% now 'Y-m-d' %}" required>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Padre/Madre Principal</label>
+    <select class="form-control" name="padre_principal" required>
+      <option value="">-- Seleccionar Padre/Tutor --</option>
+      {% for p in padres %}
+        <option value="{{ p.id }}">{{ p.nombre }} {{ p.apellido }} ({{ p.dni }})</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Grupo Asignado</label>
+    <select class="form-control" name="grupo_asignado">
+      <option value="">-- Seleccionar Grupo --</option>
+      {% for g in grupos %}
+        <option value="{{ g.id }}">{{ g.nombre_grupo }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Alergias</label>
+    <textarea class="form-control" name="alergias" rows="2"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Necesidades Especiales</label>
+    <textarea class="form-control" name="necesidades_especiales" rows="2"></textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Guardar Registro</button>
+  <a class="btn btn-secondary" href="{% url 'ver_ninos' %}">Cancelar</a>
+</form>
+{% endblock %}

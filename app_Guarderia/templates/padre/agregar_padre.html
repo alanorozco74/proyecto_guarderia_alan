@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Registrar Nuevo Padre/Madre</h3>
+<form method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Nombre</label>
+      <input class="form-control" name="nombre" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Apellido</label>
+      <input class="form-control" name="apellido" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Relación con el Niño</label>
+      <select class="form-control" name="relacion_con_nino" required>
+        <option value="Padre">Padre</option>
+        <option value="Madre">Madre</option>
+        <option value="Tutor Legal">Tutor Legal</option>
+        <option value="Abuelo/a">Abuelo/a</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">DNI / Identificación</label>
+      <input class="form-control" name="dni" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Teléfono Principal</label>
+      <input class="form-control" name="telefono_principal" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Teléfono Alternativo</label>
+      <input class="form-control" name="telefono_alternativo">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" name="email" type="email" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Profesión</label>
+      <input class="form-control" name="profesion">
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Dirección Completa</label>
+    <input class="form-control" name="direccion" required>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Guardar Registro</button>
+  <a class="btn btn-secondary" href="{% url 'ver_padres' %}">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Actualizar Padre: {{ padre.nombre }} {{ padre.apellido }}</h3>
+<form method="POST" action="{% url 'realizar_actualizacion_padre' padre.id %}">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Nombre</label>
+      <input class="form-control" name="nombre" value="{{ padre.nombre }}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Apellido</label>
+      <input class="form-control" name="apellido" value="{{ padre.apellido }}" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Relación con el Niño</label>
+      <input class="form-control" name="relacion_con_nino" value="{{ padre.relacion_con_nino }}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">DNI</label>
+      <input class="form-control" name="dni" value="{{ padre.dni }}" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Teléfono Principal</label>
+      <input class="form-control" name="telefono_principal" value="{{ padre.telefono_principal }}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Teléfono Alternativo</label>
+      <input class="form-control" name="telefono_alternativo" value="{{ padre.telefono_alternativo|default_if_none:'' }}">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" name="email" type="email" value="{{ padre.email }}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Profesión</label>
+      <input class="form-control" name="profesion" value="{{ padre.profesion|default_if_none:'' }}">
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Dirección</label>
+    <input class="form-control" name="direccion" value="{{ padre.direccion }}" required>
+  </div>
+
+  <button class="btn btn-success" type="submit">Guardar Cambios</button>
+  <a class="btn btn-secondary" href="{% url 'ver_padres' %}">Cancelar</a>
+</form>
+{% endblock %}

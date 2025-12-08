@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Actualizar Datos de: {{ nino.nombre }}</h3>
+<form method="POST" action="{% url 'realizar_actualizacion_nino' nino.id %}">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Nombre</label>
+      <input class="form-control" name="nombre" value="{{ nino.nombre }}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Apellido</label>
+      <input class="form-control" name="apellido" value="{{ nino.apellido }}" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Fecha de Nacimiento</label>
+      <input class="form-control" name="fecha_nacimiento" type="date" value="{{ nino.fecha_nacimiento|date:'Y-m-d' }}" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Género</label>
+      <select class="form-control" name="genero" required>
+        <option value="M" {% if nino.genero == 'M' %}selected{% endif %}>Masculino</option>
+        <option value="F" {% if nino.genero == 'F' %}selected{% endif %}>Femenino</option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label">Fecha Inscripción</label>
+      <input class="form-control" name="fecha_inscripcion" type="date" value="{{ nino.fecha_inscripcion|date:'Y-m-d' }}" required>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Padre/Madre Principal</label>
+    <select class="form-control" name="padre_principal" required>
+      {% for p in padres %}
+        <option value="{{ p.id }}" {% if p.id == nino.padre_principal.id %}selected{% endif %}>
+          {{ p.nombre }} {{ p.apellido }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Grupo Asignado</label>
+    <select class="form-control" name="grupo_asignado">
+      <option value="">-- Sin Grupo --</option>
+      {% for g in grupos %}
+        <option value="{{ g.id }}" {% if nino.grupo_asignado and g.id == nino.grupo_asignado.id %}selected{% endif %}>
+          {{ g.nombre_grupo }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Alergias</label>
+    <textarea class="form-control" name="alergias" rows="2">{{ nino.alergias|default_if_none:'' }}</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Necesidades Especiales</label>
+    <textarea class="form-control" name="necesidades_especiales" rows="2">{{ nino.necesidades_especiales|default_if_none:'' }}</textarea>
+  </div>
+
+  <button class="btn btn-success" type="submit">Guardar Cambios</button>
+  <a class="btn btn-secondary" href="{% url 'ver_ninos' %}">Cancelar</a>
+</form>
+{% endblock %}
