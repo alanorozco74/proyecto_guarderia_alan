@@ -8,4 +8,5 @@ A Django starter template as per the docs: https://docs.djangoproject.com/en/5.0
 <img width="1920" height="1040" alt="image" src="https://github.com/user-attachments/assets/a5c5a77f-a2f4-4e6e-81f3-01869108f352" />
 <img width="1920" height="1040" alt="image" src="https://github.com/user-attachments/assets/0a75798e-90ed-4bec-840a-79504c41cbe3" />
 <img width="1920" height="1040" alt="image" src="https://github.com/user-attachments/assets/280dc96e-5a4b-411b-a7a8-829912aaef19" />
+![WhatsApp Image 2025-12-06 at 10 57 06 PM](https://github.com/user-attachments/assets/309664a0-3676-42e7-9f30-d50fa152bb77)
 
